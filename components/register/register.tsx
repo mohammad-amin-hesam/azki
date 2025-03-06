@@ -1,11 +1,14 @@
 "use client";
 
-import { Button } from "../ui/button";
+import { Cover } from "../common/cover";
+import { Header } from "../layout/header";
+import { Main } from "./main";
 
 export function Register() {
-	return (
-		<>
-			<Button>Hi there</Button>
-		</>
-	);
+  return (
+    <Cover>
+      <Header />
+      <Main />
+    </Cover>
+  );
 }

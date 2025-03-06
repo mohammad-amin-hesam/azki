@@ -2,19 +2,20 @@
 
 import { ComponentProps } from "react";
 
-export type ButtonProps = {} & ComponentProps<"button">;
+export type ButtonProps = ComponentProps<"button">;
 
-export function Button(buttonProps: ButtonProps) {
-	const { className, children } = buttonProps;
-
-	return (
-		<button
-			{...buttonProps}
-			className={`bg-primary text-white h-[80px] rounded-[32px]  ${
-				className || ""
-			}`}
-		>
-			{children}
-		</button>
-	);
+export function Button({
+  className,
+  children,
+  ...props
+}: ButtonProps) {
+  return (
+    <button
+      {...props}
+      className={`bg-primary h-[60px] w-[180px] cursor-pointer rounded-[48px] text-white
+        ${className || ""}`}
+    >
+      {children}
+    </button>
+  );
 }
