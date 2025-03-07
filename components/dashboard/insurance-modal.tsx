@@ -23,8 +23,6 @@ export function InsuranceModal({
     if (setOpen) setOpen(false);
   };
 
-  console.log(insuranceValues);
-
   return (
     <div
       className={`fixed right-0 top-0 flex flex h-full w-full items-center
