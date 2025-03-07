@@ -1,4 +1,4 @@
-export const isWeak = (password: string) => {
+export function isWeak(password: string) {
   const containsUppercase = (ch: string) => /[A-Z]/.test(ch);
   const containsLowercase = (ch: string) => /[a-z]/.test(ch);
   const containsSpecialChar = (ch: string) =>
@@ -21,4 +21,18 @@ export const isWeak = (password: string) => {
     countOfSpecialChar < 1 ||
     countOfNumbers < 1
   );
-};
+}
+
+export function isPersian(s: string) {
+  var PersianOrASCII = /[آ-ی]|([a-zA-Z])/;
+  let m;
+  if ((m = s.match(PersianOrASCII)) !== null) {
+    if (m[1]) {
+      return false;
+    } else {
+      return true;
+    }
+  } else {
+    return true;
+  }
+}

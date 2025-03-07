@@ -1,56 +1,45 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import {
-  defaultRegisterValues,
-  registerFormSchema,
-  RegisterValuesType,
-} from "./schemas/register-schema";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { FormField } from "./form-field";
+import { useRegister } from "../hooks/use-register";
 
 export function RegisterForm() {
-  const { register, handleSubmit } = useForm<RegisterValuesType>({
-    resolver: zodResolver(registerFormSchema),
-    defaultValues: defaultRegisterValues,
-  });
-
-  const registerUser = (user: RegisterValuesType) => {
-    console.log(user);
-  };
+  const { errors, register, submitUserRegister } = useRegister();
 
   return (
     <form
-      className="flex flex-col gap-[32px] lg:max-w-[600px]"
-      onSubmit={handleSubmit(registerUser)}
+      className="flex flex-col gap-[16px] lg:gap-[32px]"
+      onSubmit={submitUserRegister}
       autoComplete="off"
     >
-      <div className="flex w-full flex-col gap-[32px] lg:flex-row">
-        <Input
-          className="ld:flex-1"
+      <div className="flex w-full flex-col gap-[16px] lg:flex-row lg:gap-[32px]">
+        <FormField
           placeholder="نام"
+          message={errors.firstName?.message}
           {...register("firstName")}
         />
-        <Input
-          className="ld:flex-1"
+        <FormField
           placeholder="نام خانوادگی"
+          message={errors.lastName?.message}
           {...register("lastName")}
         />
       </div>
-      <Input
+      <FormField
         placeholder="شماره موبایل"
         type="number"
+        message={errors.mobile?.message}
         {...register("mobile")}
       />
-      <Input
+      <FormField
         placeholder="رمز عبور"
         type="password"
         autoComplete={"new-password"}
+        message={errors.password?.message}
         {...register("password")}
       />
       <div className="flex justify-end">
-        <Button>ثبت نام</Button>
+        <Button variant={"primary"}>ثبت نام</Button>
       </div>
     </form>
   );

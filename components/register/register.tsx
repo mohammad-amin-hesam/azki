@@ -1,14 +1,12 @@
 "use client";
 
 import { Cover } from "../common/cover";
-import { Header } from "../layout/header";
-import { Main } from "./main";
+import { RegisterForm } from "./forms/form";
 
 export function Register() {
   return (
-    <Cover>
-      <Header />
-      <Main />
+    <Cover title="ثبت نام">
+      <RegisterForm />
     </Cover>
   );
 }

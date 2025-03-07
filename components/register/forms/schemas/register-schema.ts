@@ -1,4 +1,4 @@
-import { isWeak } from "@/utils/forms";
+import { isPersian, isWeak } from "@/utils/forms";
 import { z } from "zod";
 
 export const registerFormSchema = z
@@ -12,7 +12,23 @@ export const registerFormSchema = z
       .max(12, { message: "شماره موبایل وارد شده صحیح نمی‌باشد" }),
     password: z.string().nonempty("رمز عبور الزامی می‌باشد"),
   })
-  .superRefine(({ password }, ctx) => {
+  .superRefine(({ password, firstName, lastName }, ctx) => {
+    if (!isPersian(firstName)) {
+      ctx.addIssue({
+        code: "custom",
+        message: "نام را با حروف فارسی وارد کنید",
+        path: ["firstName"],
+      });
+    }
+
+    if (!isPersian(lastName)) {
+      ctx.addIssue({
+        code: "custom",
+        message: "نام خانوادگی را با حروف فارسی وارد کنید",
+        path: ["lastName"],
+      });
+    }
+
     if (isWeak(password)) {
       ctx.addIssue({
         code: "custom",
